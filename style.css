@@ -41,7 +41,7 @@ body {
 	transform: translate(-50%);
 }
 
-.matchId {
+#matchId {
 	padding: 100px;
 	z-index: 5;
 	position: absolute;

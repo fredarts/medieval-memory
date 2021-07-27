@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	function show_image(src, width, height) {
+	function showImage(src, width, height, timeout) {
 		let imgo = document.createElement("img");
 		imgo.src = src;
 		imgo.width = width;
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// This next line will just add it to the <body> tag
 		document.body.appendChild(imgo);
-		window.setTimeout(document.getElementById('matchId').remove(), 3000);
+		setTimeout(() => document.getElementById('matchId').remove(), timeout);
 	}
 
 	function createBoard() {
@@ -138,15 +138,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		const optionTwoId = cardsChosenId[1];
 		if (cardsChosen[0] === cardsChosen[1]) {
 			matchSound.play();
-			//alert('You Found a Match')
-			show_image('images/match.png', 280, 86);
+			showImage('images/match.png', 280, 86, 2000);
 			cards[optionOneId].setAttribute('src', 'images/vazio.jpg');
 			cards[optionTwoId].setAttribute('src', 'images/vazio.jpg');
+			// setar também algum atributo que impeça o clique nesses cards novamente
 			cardsWon.push(cardsChosen);
 		} else {
+			failSound.play();
 			cards[optionOneId].setAttribute('src', 'images/costas.jpg');
 			cards[optionTwoId].setAttribute('src', 'images/costas.jpg');
-			alert('Sorry, try again!');
+			showImage('images/fail.png', 280, 86, 500); // trocar dimensões
 		}
 
 		cardsChosen = [];
