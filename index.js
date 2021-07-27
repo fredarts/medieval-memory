@@ -55,8 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	cardArray.sort(() => 0.5 - Math.random());
 
-	const grid = document.querySelector('.grid');
 	let resultDisplay = document.querySelector('#result');
+
+	let musicBtn = document.createElement('button');
+	let musicBtnImg = document.createElement('img');
 
 	let cardsChosen = [];
 	let cardsChosenId = [];
@@ -76,14 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		btn.addEventListener('click',createBoard, false);
 	}
 
-	function musicBtn(){
-		let btn = document.createElement('button');
-		let img = document.createElement('img');
-		img.setAttribute('src', 'images/musicOn.png');
-		btn.classList.add('musicbtn');
-		btn.appendChild(img);
-		document.body.appendChild(btn);
-		btn.addEventListener('click', toggleBackgroundMusic);
+	function initMusicBtn(){
+		musicBtnImg.setAttribute('src', 'images/musicOn.png');
+		musicBtn.classList.add('musicbtn');
+		musicBtn.appendChild(musicBtnImg);
+		document.body.appendChild(musicBtn);
+		musicBtn.addEventListener('click', toggleBackgroundMusic);
 	}
 
 	function scoreBar(){
@@ -101,9 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	function toggleBackgroundMusic(){
 		if (backgroundMusic.volume == 0) {
 			backgroundMusic.volume = 0.20;
+			musicBtnImg.setAttribute('src', 'images/musicOn.png');
 		}
 		else {
 			backgroundMusic.volume = 0;
+			musicBtnImg.setAttribute('src', 'images/musicOff.png');
 		}
 	}
 
@@ -121,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function createBoard() {
 		playBackground();
-		musicBtn();
+		initMusicBtn();
 		scoreBar();
 		let btn = document.getElementsByClassName('zindex')[0];
   	btn.parentNode.removeChild(btn);
@@ -158,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		cardsChosen = [];
 		cardsChosenId = [];
 		resultDisplay = cardsWon.length;
+		console.log(resultDisplay);
 
 		if (cardsWon.length === cardArray.length/2) {
 			resultDisplay.textContent = 'Congratulations, you found them all';
