@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let audio = new Audio('selectCard.mp3');
 	let backgroundMusic = new Audio('background.mp3');
 	let matchSound = new Audio('match.mp3');
+	let failSound = new Audio('fail.mp3');
 
 	function startGameButton(){
 		let btn = document.createElement('button');
@@ -147,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			failSound.play();
 			cards[optionOneId].setAttribute('src', 'images/costas.jpg');
 			cards[optionTwoId].setAttribute('src', 'images/costas.jpg');
-			showImage('images/fail.png', 280, 86, 500); // trocar dimensões
+			showImage('images/fail.png', 200, 86, 500);
 		}
 
 		cardsChosen = [];
