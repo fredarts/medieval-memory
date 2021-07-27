@@ -86,13 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		musicBtn.addEventListener('click', toggleBackgroundMusic);
 	}
 
-	function scoreBar(){
-		let score = document.createElement('img');
-		score.setAttribute('src', 'images/score.png');
-		score.classList.add('scoreBar');
-		document.body.appendChild(score);
-	}
-
 	function playBackground(){
 		backgroundMusic.volume = 0.20;
 		backgroundMusic.play();
@@ -124,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	function createBoard() {
 		playBackground();
 		initMusicBtn();
-		scoreBar();
 		let btn = document.getElementsByClassName('zindex')[0];
   	btn.parentNode.removeChild(btn);
   	let grid = document.createElement('div');
@@ -158,9 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 
 		cardsChosen = [];
-		cardsChosenId = [];
-		resultDisplay = cardsWon.length;
-		console.log(resultDisplay);
+		cardsChosenId = [];	
+		resultDisplay.innerHTML = cardsWon.length;
 
 		if (cardsWon.length === cardArray.length/2) {
 			resultDisplay.textContent = 'Congratulations, you found them all';
