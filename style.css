@@ -4,13 +4,13 @@
 	height: 300px;
 	width: 400px;
 	position: absolute;
-  	left: 50%;
-  	top: 65%;
-  	transform: translate(-50%, -50%);
-  	border-style: solid;
-  	border-width: 8px;
-  	border-color: #4a4a4a;
-  	box-shadow: 5px 5px 5px #2a2a2a;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 8px;
+  border-color: #4a4a4a;
+  box-shadow: 5px 5px 5px #2a2a2a;
 }
 
 
@@ -48,7 +48,55 @@ body {
 
 .matchId {
 	padding: 100px;
+	z-index: 5;
+	position: absolute;
+	left: 50%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+}
+
+.zindex {
 	z-index: 3;
 	position: absolute;
+	height: 200px;
+	width: 400px;
+	position: absolute;
+	left: 50%;
+	margin-top: 21%;
+	transform: translate(-50%);
+	background-color: transparent;
+	border-style: none;
+}
+
+
+.musicbtn{
+	z-index: 3;
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	position: absolute;
+	left: 82%;
+	margin-top: 2%;
+	transform: translate(100%);
+	background-color: transparent;
+	border-style: none;
+
+}
+
+
+
+.scoreBar{
+	z-index: 3;
+	position: absolute;
+	height: 50px;
+	width: 150px;
+	position: absolute;
+	left: 2%;
+	margin-top: 2%;
+	
+
+
+
+
 }
 

@@ -93,26 +93,76 @@ document.addEventListener('DOMContentLoaded', () => {
 	cardArray.sort(() => 0.5 - Math.random())
 
 	const grid = document.querySelector('.grid')
-	const resultDisplay = document.querySelector('#result')
+	let resultDisplay = document.querySelector('#result')
 
-	var cardsChosen = []
+	let cardsChosen = []
 
-	var cardsChosenId = []
+	let cardsChosenId = []
 
-	var cardsWon = []
+	let cardsWon = []
 
-	var audio = new Audio('selectCard.mp3');
+	let audio = new Audio('selectCard.mp3');
 
-	var background = new Audio('background.mp3');
+	let backgroundMusic = new Audio('background.mp3');
 
-	var match = new Audio('match.mp3');
+	let matchSound = new Audio('match.mp3');
 
 
+	function startGameButton(){
+		let btn = document.createElement('button');
+		let img = document.createElement('img');
+		img.setAttribute('src', 'images/startGame.png')
+	    btn.classList.add('zindex');
+	    btn.appendChild(img)
+	    document.body.appendChild(btn);
+	    btn.addEventListener('click',createBoard, false);
+	    
+
+
+	}
+
+
+	function musicBtn(){
+		let btn = document.createElement('button');
+		let img = document.createElement('img');
+		img.setAttribute('src', 'images/musicOn.png')
+	    btn.classList.add('musicbtn');
+	    btn.appendChild(img)
+	    document.body.appendChild(btn);
+	    btn.addEventListener('click', toggleBackgroundMusic);
+	    
+
+
+	}
+
+
+	function scoreBar(){
+		let score = document.createElement('img');
+		score.setAttribute('src', 'images/score.png')
+	    score.classList.add('scoreBar');
+	    document.body.appendChild(score);
+	    
+	    
+
+
+	}
 
 
 	function playBackground(){
-		background.volume = 0.20;
-		background.play();
+		backgroundMusic.volume = 0.20;
+		backgroundMusic.play();
+
+	}
+
+
+	function toggleBackgroundMusic(){
+		if (backgroundMusic.volume == 0) {
+			backgroundMusic.volume = 0.20;
+		}
+		else {
+			backgroundMusic.volume = 0;
+
+		}
 
 	}
 
@@ -122,11 +172,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	    imgo.src = src;
 	    imgo.width = width;
 	    imgo.height = height;
-	    imgo.classList.add('matchId');
+	    imgo.id = 'matchId';
 
 	    // This next line will just add it to the <body> tag
 	    document.body.appendChild(imgo);
-	    window.setTimeout("document.getElementsByClassName('matchId').style.display='none';", 3000)
+	    window.setTimeout(document.getElementById('matchId').remove(), 3000)
+	     
 
 
 
@@ -135,6 +186,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 
 	function createBoard() {
+		playBackground();
+		musicBtn();
+		scoreBar();
+		let btn = document.getElementsByClassName('zindex')[0];
+    	btn.parentNode.removeChild(btn);
+    	let grid = document.createElement('div');
+    	let bg = document.getElementsByClassName('bg')[0];
+    	grid.classList.add('grid');
+    	bg.appendChild(grid);
 		for (let i = 0; i < cardArray.length; i++) {
 			let card = document.createElement('img')
 			card.setAttribute('src', 'images/costas.jpg')
@@ -151,9 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		const optionOneId = cardsChosenId[0]
 		const optionTwoId = cardsChosenId[1]
 		if (cardsChosen[0] === cardsChosen[1]) {
-			match.play();
+			matchSound.play();
 			//alert('You Found a Match')
-			show_image('images/logo.png', 400, 200)
+			show_image('images/match.png', 280, 86)
 			cards[optionOneId].setAttribute('src', 'images/vazio.jpg')
 			cards[optionTwoId].setAttribute('src', 'images/vazio.jpg')
 			cardsWon.push(cardsChosen)
@@ -178,7 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	function flipCard(){
 		var cardId = this.getAttribute('data-id')
 		cardsChosen.push(cardArray[cardId].name)
-		playBackground()
 		cardsChosenId.push(cardId)
 		this.setAttribute('src', cardArray[cardId].img)
 		audio.play();
@@ -188,7 +247,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	}
 
-	createBoard()
+	startGameButton()
+	
 
 
 
