@@ -14,11 +14,11 @@
 }
 
 .bg {
-  background-image: url('images/backgroundImage.png');
+  background-image: url('assets/images/backgroundImage.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-position:center center;
+  background-position: center center;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -32,7 +32,7 @@ body {
 }
 
 .logo {
-	background-image: url(images/logo.png);
+	background-image: url('assets/images/logo.png');
 	height: 200px;
 	width: 400px;
 	position: absolute;
@@ -50,12 +50,11 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.zindex {
+.z-index {
 	z-index: 3;
 	position: absolute;
 	height: 200px;
 	width: 400px;
-	position: absolute;
 	left: 50%;
 	margin-top: 21%;
 	transform: translate(-50%);
@@ -63,12 +62,11 @@ body {
 	border-style: none;
 }
 
-.musicbtn {
+.music-btn {
 	z-index: 3;
 	position: absolute;
 	height: 100px;
 	width: 100px;
-	position: absolute;
 	left: 82%;
 	margin-top: 2%;
 	transform: translate(100%);
@@ -81,11 +79,16 @@ body {
 	position: absolute;
 	height: 50px;
 	width: 150px;
-	position: absolute;
 	left: 2%;
 	margin-top: 2%;
-	background-image: url("images/score.png");
-	font-size: 40px;
+	background-image: url("assets/images/score.png");
 	text-align: right;
 }
 
+.score-bar p {
+		font-size: 32px;
+		margin-block-start: 0em;
+		margin-block-end: 0em;
+		margin-right: 20px;
+		margin-top: 6px;
+	}
