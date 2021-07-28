@@ -63,6 +63,24 @@ body {
 	border-style: none;
 }
 
+.zindex:hover {
+	z-index: 3;
+	position: absolute;
+	height: 200px;
+	width: 400px;
+	position: absolute;
+	left: 50.20%;
+	margin-top: 21.20%;
+	transform: translate(-50%);
+	background-color: transparent;
+	border-style: none;
+}
+
+
+
+
+
+
 .musicbtn {
 	z-index: 3;
 	position: absolute;
@@ -87,5 +105,6 @@ body {
 	background-image: url("images/score.png");
 	font-size: 40px;
 	text-align: right;
+	font-family: Alagard;
 }
 
