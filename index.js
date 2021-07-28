@@ -5,51 +5,51 @@ document.addEventListener('DOMContentLoaded', () => {
 	const cardArray = [
 		{
 			name: 'espada',
-			img: 'images/espada.jpg'
+			img: 'assets/images/espada.jpg'
 		},
 		{
 			name: 'espada',
-			img: 'images/espada.jpg'
+			img: 'assets/images/espada.jpg'
 		},
 		{
 			name: 'besta',
-			img: 'images/besta.jpg'
+			img: 'assets/images/besta.jpg'
 		},
 		{
 			name: 'besta',
-			img: 'images/besta.jpg'
+			img: 'assets/images/besta.jpg'
 		},
 		{
 			name: 'bau',
-			img: 'images/bau.jpg'
+			img: 'assets/images/bau.jpg'
 		},
 		{
 			name: 'bau',
-			img: 'images/bau.jpg'
+			img: 'assets/images/bau.jpg'
 		},
 		{
 			name: 'elmo',
-			img: 'images/elmo.jpg'
+			img: 'assets/images/elmo.jpg'
 		},
 		{
 			name: 'elmo',
-			img: 'images/elmo.jpg'
+			img: 'assets/images/elmo.jpg'
 		},
 		{
 			name: 'botas',
-			img: 'images/botas.jpg'
+			img: 'assets/images/botas.jpg'
 		},
 		{
 			name: 'botas',
-			img: 'images/botas.jpg'
+			img: 'assets/images/botas.jpg'
 		},
 		{
 			name: 'machado',
-			img: 'images/machado.jpg'
+			img: 'assets/images/machado.jpg'
 		},
 		{
 			name: 'machado',
-			img: 'images/machado.jpg'
+			img: 'assets/images/machado.jpg'
 		}
 	];
 
@@ -64,24 +64,24 @@ document.addEventListener('DOMContentLoaded', () => {
 	let cardsChosenId = [];
 	let cardsWon = [];
 
-	let audio = new Audio('selectCard.mp3');
-	let backgroundMusic = new Audio('background.mp3');
-	let matchSound = new Audio('match.mp3');
-	let failSound = new Audio('fail.mp3');
+	let audio = new Audio('assets/audio/selectCard.mp3');
+	let backgroundMusic = new Audio('assets/audio/background.mp3');
+	let matchSound = new Audio('assets/audio/match.mp3');
+	let failSound = new Audio('assets/audio/fail.mp3');
 
 	function startGameButton(){
 		let btn = document.createElement('button');
 		let img = document.createElement('img');
-		img.setAttribute('src', 'images/startGame.png');
-		btn.classList.add('zindex');
+		img.setAttribute('src', 'assets/images/startGame.png');
+		btn.classList.add('z-index');
 		btn.appendChild(img);
 		document.body.appendChild(btn);
 		btn.addEventListener('click',createBoard, false);
 	}
 
 	function initMusicBtn(){
-		musicBtnImg.setAttribute('src', 'images/musicOn.png');
-		musicBtn.classList.add('musicbtn');
+		musicBtnImg.setAttribute('src', 'assets/images/musicOn.png');
+		musicBtn.classList.add('music-btn');
 		musicBtn.appendChild(musicBtnImg);
 		document.body.appendChild(musicBtn);
 		musicBtn.addEventListener('click', toggleBackgroundMusic);
@@ -95,11 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	function toggleBackgroundMusic(){
 		if (backgroundMusic.volume == 0) {
 			backgroundMusic.volume = 0.20;
-			musicBtnImg.setAttribute('src', 'images/musicOn.png');
+			musicBtnImg.setAttribute('src', 'assets/images/musicOn.png');
 		}
 		else {
 			backgroundMusic.volume = 0;
-			musicBtnImg.setAttribute('src', 'images/musicOff.png');
+			musicBtnImg.setAttribute('src', 'assets/images/musicOff.png');
 		}
 	}
 
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	function createBoard() {
 		playBackground();
 		initMusicBtn();
-		let btn = document.getElementsByClassName('zindex')[0];
+		let btn = document.getElementsByClassName('z-index')[0];
   	btn.parentNode.removeChild(btn);
   	let grid = document.createElement('div');
 		let bg = document.getElementsByClassName('bg')[0];
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		bg.appendChild(grid);
 		for (let i = 0; i < cardArray.length; i++) {
 			let card = document.createElement('img');
-			card.setAttribute('src', 'images/costas.jpg');
+			card.setAttribute('src', 'assets/images/costas.jpg');
 			card.setAttribute('data-id', i);
 			card.addEventListener('click', flipCard);
 			grid.appendChild(card);
@@ -139,16 +139,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		const optionTwoId = cardsChosenId[1];
 		if (cardsChosen[0] === cardsChosen[1]) {
 			matchSound.play();
-			showImage('images/match.png', 280, 86, 2000);
-			cards[optionOneId].setAttribute('src', 'images/vazio.jpg');
-			cards[optionTwoId].setAttribute('src', 'images/vazio.jpg');
+			showImage('assets/images/match.png', 280, 86, 2000);
+			cards[optionOneId].setAttribute('src', 'assets/images/vazio.jpg');
+			cards[optionTwoId].setAttribute('src', 'assets/images/vazio.jpg');
 			// setar também algum atributo que impeça o clique nesses cards novamente
 			cardsWon.push(cardsChosen);
 		} else {
 			failSound.play();
-			cards[optionOneId].setAttribute('src', 'images/costas.jpg');
-			cards[optionTwoId].setAttribute('src', 'images/costas.jpg');
-			showImage('images/fail.png', 200, 86, 500);
+			cards[optionOneId].setAttribute('src', 'assets/images/costas.jpg');
+			cards[optionTwoId].setAttribute('src', 'assets/images/costas.jpg');
+			showImage('assets/images/fail.png', 200, 86, 500);
 		}
 
 		cardsChosen = [];
