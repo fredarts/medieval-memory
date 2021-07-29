@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		musicBtn.addEventListener('click', toggleBackgroundMusic);
 	}
 
-	function playBackground(){
+	function playBackgroundMusic(){
 		backgroundMusic.volume = 0.20;
 		backgroundMusic.play();
 	}
@@ -116,8 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function createBoard() {
-		playBackground();
+		playBackgroundMusic();
 		initMusicBtn();
+		let scoreBar = document.getElementsByClassName('score-bar')[0];
+		scoreBar.removeAttribute('hidden');
 		let btn = document.getElementsByClassName('z-index')[0];
   	btn.parentNode.removeChild(btn);
   	let grid = document.createElement('div');
