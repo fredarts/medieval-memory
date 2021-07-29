@@ -138,10 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			matchSound.play();
 			showImage('assets/images/match.png', 280, 86, 2000);
 			cards[optionOneId].setAttribute('src', 'assets/images/vazio.jpg');
-			cards[optionOneId].removeAttribute('click');
 			cards[optionTwoId].setAttribute('src', 'assets/images/vazio.jpg');
-			cards[optionTwoId].removeAttribute('click');
-			// setar também algum atributo que impeça o clique nesses cards novamente
+			cards[optionOneId].removeEventListener('click', flipCard);
+			cards[optionTwoId].removeEventListener('click', flipCard);
 			cardsWon.push(cardsChosen);
 		} else {
 			failSound.play();
