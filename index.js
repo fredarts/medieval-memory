@@ -73,11 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	function startGameButton(){
 		let startBtn = document.createElement('button');
 		let startBtnImg = document.createElement('img');
-		startBtnImg.setAttribute('src', 'assets/images/startGame.png');
 		startBtn.classList.add('z-index');
+		startBtnImg.setAttribute('src', 'assets/images/startGame.png');
+		startBtn.addEventListener('click',createBoard, false);
 		startBtn.appendChild(startBtnImg);
 		document.body.appendChild(startBtn);
-		startBtn.addEventListener('click',createBoard, false);
 	}
 
 	function playBackgroundMusic(){
@@ -146,17 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		const optionOneId = cardsChosen[0].id;
 		const optionTwoId = cardsChosen[1].id;
 		if (cardsChosen[0].name === cardsChosen[1].name) {
-			matchSound.play();
-			showImage('assets/images/match.png', 280, 86, 2000);
-			cards[optionOneId].lastElementChild.classList.remove('card__face--back');
-			cards[optionOneId].lastElementChild.classList.add('card__face--matched');
-			cards[optionTwoId].lastElementChild.classList.remove('card__face--back');
-			cards[optionTwoId].lastElementChild.classList.add('card__face--matched');
-			cards[optionOneId].removeEventListener('click', flipCard);
-			cards[optionTwoId].removeEventListener('click', flipCard);
-			toggleIsFlipped(cards[optionOneId]);
-			toggleIsFlipped(cards[optionTwoId]);
-			cardsWon.push(cardsChosen);
+			setTimeout(() => {
+				matchSound.play();
+				showImage('assets/images/match.png', 280, 86, 2000);
+				disableCard(cards[optionOneId]);
+				disableCard(cards[optionTwoId]);
+				cardsWon.push(cardsChosen);
+			}, 400);
 		} else {
 			setTimeout(() => {			
 				failSound.play();
@@ -188,6 +184,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function toggleIsFlipped(card) {
 		card.classList.toggle('is-flipped');
+	}
+
+	function disableCard(card) {
+		card.lastElementChild.classList.remove('card__face--back');
+		card.lastElementChild.classList.add('card__face--matched');
+		card.removeEventListener('click', flipCard);
+		toggleIsFlipped(card);
 	}
 
 	startGameButton();
