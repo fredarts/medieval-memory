@@ -73,11 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	function startGameButton(){
 		let startBtn = document.createElement('button');
 		let startBtnImg = document.createElement('img');
-		startBtnImg.setAttribute('src', 'assets/images/startGame.png');
 		startBtn.classList.add('z-index');
+		startBtnImg.setAttribute('src', 'assets/images/startGame.png');
+		startBtn.addEventListener('click',createBoard, false);
 		startBtn.appendChild(startBtnImg);
 		document.body.appendChild(startBtn);
-		startBtn.addEventListener('click',createBoard, false);
 	}
 
 	function playBackgroundMusic(){
@@ -103,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		imgo.height = height;
 		imgo.id = 'matchId';
 
-		// This next line will just add it to the <body> tag
 		document.body.appendChild(imgo);
 		setTimeout(() => document.getElementById('matchId').remove(), timeout);
 	}
@@ -122,31 +121,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function generateCards(parent) {
 		for (let i = 0; i < cardArray.length; i++) {
-			let card = document.createElement('img');
-			card.setAttribute('src', 'assets/images/costas.jpg');
+			const card = document.createElement('div');
+			card.classList.add('card');
 			card.setAttribute('data-id', i);
 			card.addEventListener('click', flipCard);
+
+			const cardFront = document.createElement('div');
+			cardFront.classList.add('card__face', 'card__face--front');
+			const img = document.createElement('img');
+			img.setAttribute('src', cardArray[i].img);
+			cardFront.appendChild(img);
+
+			const cardBack = document.createElement('div');
+			cardBack.classList.add('card__face', 'card__face--back');
+			
+			card.appendChild(cardFront);
+			card.appendChild(cardBack);
 			parent.appendChild(card);
 		}
 	}
 
 	function checkForMatch(){
-		var cards = document.querySelectorAll('.grid img');
-		const optionOneId = cardsChosenId[0];
-		const optionTwoId = cardsChosenId[1];
-		if (cardsChosen[0] === cardsChosen[1]) {
-			matchSound.play();
-			showImage('assets/images/match.png', 280, 86, 2000);
-			cards[optionOneId].setAttribute('src', 'assets/images/vazio.jpg');
-			cards[optionTwoId].setAttribute('src', 'assets/images/vazio.jpg');
-			cards[optionOneId].removeEventListener('click', flipCard);
-			cards[optionTwoId].removeEventListener('click', flipCard);
-			cardsWon.push(cardsChosen);
+		var cards = document.querySelectorAll('.grid .card');
+		const optionOneId = cardsChosen[0].id;
+		const optionTwoId = cardsChosen[1].id;
+		if (cardsChosen[0].name === cardsChosen[1].name) {
+			setTimeout(() => {
+				matchSound.play();
+				showImage('assets/images/match.png', 280, 86, 2000);
+				disableCard(cards[optionOneId]);
+				disableCard(cards[optionTwoId]);
+				cardsWon.push(cardsChosen);
+			}, 400);
 		} else {
-			failSound.play();
-			cards[optionOneId].setAttribute('src', 'assets/images/costas.jpg');
-			cards[optionTwoId].setAttribute('src', 'assets/images/costas.jpg');
-			showImage('assets/images/fail.png', 200, 86, 500);
+			setTimeout(() => {			
+				failSound.play();
+				toggleIsFlipped(cards[optionOneId]);
+				toggleIsFlipped(cards[optionTwoId]);
+				showImage('assets/images/fail.png', 200, 86, 500);
+			}, 400);
 		}
 
 		cardsChosen = [];
@@ -154,20 +167,30 @@ document.addEventListener('DOMContentLoaded', () => {
 		resultDisplay.innerHTML = cardsWon.length;
 			
 		if (cardsWon.length === cardArray.length/2) {
-			resultDisplay.textContent = 'Congratulations, you found them all';
+			showImage('assets/images/congratulations.png', 200, 200);
 		}
-
 	}
 
 	function flipCard(){
-		var cardId = this.getAttribute('data-id');
-		cardsChosen.push(cardArray[cardId].name);
-		cardsChosenId.push(cardId);
-		this.setAttribute('src', cardArray[cardId].img);
+		const cardId = this.getAttribute('data-id');
+		const card = cardArray[cardId];
+		toggleIsFlipped(this);
+		cardsChosen.push({...card, id: cardId});
 		audio.play();
 		if (cardsChosen.length === 2) {
 			setTimeout(checkForMatch, 500);
 		}
+	}
+
+	function toggleIsFlipped(card) {
+		card.classList.toggle('is-flipped');
+	}
+
+	function disableCard(card) {
+		card.lastElementChild.classList.remove('card__face--back');
+		card.lastElementChild.classList.add('card__face--matched');
+		card.removeEventListener('click', flipCard);
+		toggleIsFlipped(card);
 	}
 
 	startGameButton();
