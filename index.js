@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	function toggleBackgroundMusic(){
 		if (backgroundMusic.volume == 0) {
 			backgroundMusic.volume = 0.20;
-			musicBtnImg.setAttribute('src', 'assets/images/musicOn.png');
+			musicBtnImg.setAttribute('src', 'assets/images/musicON.png');
 		}
 		else {
 			backgroundMusic.volume = 0;
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		resultDisplay.innerHTML = cardsWon.length;
 			
 		if (cardsWon.length === cardArray.length/2) {
-			showImage('assets/images/congratulations.png', 200, 200);
+			showImage('assets/images/congratulations.png', 527, 86);
 		}
 	}
 
