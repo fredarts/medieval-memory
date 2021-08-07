@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	function toggleBackgroundMusic(){
 		if (backgroundMusic.volume == 0) {
 			backgroundMusic.volume = 0.20;
-			musicBtnImg.setAttribute('src', 'assets/images/musicON.png');
+			musicBtnImg.setAttribute('src', 'assets/images/musicOn.png');
 		}
 		else {
 			backgroundMusic.volume = 0;
