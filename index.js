@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-//opções de cartas
+	//opções de cartas
 
 	const cardArray = [
 		{
@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	let musicBtnImg = musicBtn.firstElementChild;
 
 	let cardsChosen = [];
-	let cardsChosenId = [];
 	let cardsWon = [];
 
 	let audio = new Audio('assets/audio/selectCard.mp3');
@@ -173,9 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function flipCard(){
 		const cardId = this.getAttribute('data-id');
-		const card = cardArray[cardId];
-		toggleIsFlipped(this);
-		cardsChosen.push({...card, id: cardId});
+		const card = { ...cardArray[cardId], id: cardId };
+		if (!cardsChosen.some(c => c.id === cardId)) {
+			toggleIsFlipped(this);
+			cardsChosen.push(card);
+		};
 		audio.play();
 		if (cardsChosen.length === 2) {
 			setTimeout(checkForMatch, 500);
