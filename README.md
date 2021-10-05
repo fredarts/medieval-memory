@@ -6,7 +6,6 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/fredarts/medieval-memory?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/fredarts/medieval-memory?style=for-the-badge)
 ![Github open issues](https://img.shields.io/github/issues/fredarts/medieval-memory?style=for-the-badge)
-![Github open pull requests](https://img.shields.io/github/pr-raw/fredarts/medieval-memory?style=for-the-badge)
 
 ![Medieval Memory Game Screen](https://github.com/fredarts/medieval-memory/blob/main/medievalmemory.jpg?raw=true)
 
