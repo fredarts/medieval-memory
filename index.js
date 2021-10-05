@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let musicBtnImg = musicBtn.firstElementChild;
 
 	let cardsChosen = [];
-	let cardsWon = [];
+	let cardsWon = 0;
 
 	let audio = new Audio('assets/audio/selectCard.mp3');
 	let backgroundMusic = new Audio('assets/audio/background.mp3');
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	function showImage(src, width, height, timeout) {
+	function showImage(src, width, height, timeout = 4000) {
 		let imgo = document.createElement('img');
 		imgo.src = src;
 		imgo.width = width;
@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		playBackgroundMusic();
 		let scoreBar = document.getElementsByClassName('score-bar')[0];
 		scoreBar.removeAttribute('hidden');
+		resultDisplay.innerHTML = 0;
 		musicBtn.removeAttribute('hidden');
 		let grid = document.getElementsByClassName('grid')[0];
 		grid.style.display = 'flex';
@@ -144,29 +145,34 @@ document.addEventListener('DOMContentLoaded', () => {
 		var cards = document.querySelectorAll('.grid .card');
 		const optionOneId = cardsChosen[0].id;
 		const optionTwoId = cardsChosen[1].id;
+		const TIMEOUTMATCH = 2000;
+		const TIMEOUTFAIL = 500;
+		const TIMEOUTFLIP = 400;
+		
 		if (cardsChosen[0].name === cardsChosen[1].name) {
 			setTimeout(() => {
 				matchSound.play();
-				showImage('assets/images/match.png', 280, 86, 2000);
+				showImage('assets/images/match.png', 280, 86, TIMEOUTMATCH);
 				disableCard(cards[optionOneId]);
 				disableCard(cards[optionTwoId]);
-				cardsWon.push(cardsChosen);
-			}, 400);
+			}, TIMEOUTFLIP);
+			cardsWon++;
+			resultDisplay.innerHTML = cardsWon;
 		} else {
 			setTimeout(() => {			
 				failSound.play();
 				toggleIsFlipped(cards[optionOneId]);
 				toggleIsFlipped(cards[optionTwoId]);
-				showImage('assets/images/fail.png', 200, 86, 500);
-			}, 400);
+				showImage('assets/images/fail.png', 200, 86, TIMEOUTFAIL);
+			}, TIMEOUTFLIP);
 		}
 
 		cardsChosen = [];
-		cardsChosenId = [];	
-		resultDisplay.innerHTML = cardsWon.length;
-			
-		if (cardsWon.length === cardArray.length/2) {
-			showImage('assets/images/congratulations.png', 527, 86);
+					
+		if (cardsWon == cardArray.length/2) {
+			setTimeout(() => {
+				showImage('assets/images/congratulations.png', 527, 86)
+			}, TIMEOUTMATCH + TIMEOUTFLIP);
 		}
 	}
 
